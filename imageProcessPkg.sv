@@ -10,7 +10,7 @@ function automatic real abs_real(input real x);
   return (x < 0) ? -x : x;
 endfunction : abs_real
 
-  // value1, value2의 상대 오차가 threshold 미만이면 0, 이상이면 1 반환
+// Returns 0 if the relative error between value1 and value2 is below the threshold, otherwise returns 1.
 function automatic int valueCompare(
   input real value1,
   input real value2,
@@ -18,7 +18,6 @@ function automatic int valueCompare(
   input real maxValue
 );
  real difference;
- // 사용자 정의 abs_real 함수를 사용
  difference = abs_real((value1 - value2) / maxValue);
 //  $display("Percentage error: %0f%%", difference * 100);
  if (difference < threshold)
@@ -47,12 +46,10 @@ function automatic int totalPixelEval(
                       real'(dutPixel[i]),
                       threshold,
                       maxValue) ) begin
-      // 통과 채널 로그
       $display("[%0t] [Frame:%0d][x:%0d][y:%0d]   Channel %0d SUCCESS: ref=%0h, dut=%0h",
                $realtime,frame, x, y, i+1, refPixel[i], dutPixel[i]);
     end
     else begin
-      // 실패 채널 로그
       $display("[%0t] [Frame:%0d][x:%0d][y:%0d]   Channel %0d FAIL: ref=%0h, dut=%0h",
                $realtime,frame, x, y, i+1, refPixel[i], dutPixel[i]);
       anyFail = 1;
@@ -93,9 +90,7 @@ function automatic void readPixelTxt_RGB(
 
   while (!$feof(fd)) begin
      if (!$fgets(line, fd)) break;
-     // 주석(#) 또는 빈 줄 skip
      if (line.len() == 0 || line.substr(0,1) == "#") continue;
-     // 행 파싱
      code = $sscanf(line, "%d %d %h %h %h", x, y, r_val, g_val, b_val);
      if (code != 5) begin
         $display("ERROR: Malformed line: %s", line);
@@ -125,7 +120,6 @@ function automatic void readPixelTxt_1d_in(
      $finish;
   end
 
-  // 헤더(“# x y Data”)가 있다면 첫 줄을 무시
   if (!$fgets(line, fd)) begin
      $display("ERROR: Empty file %s", filename);
      $finish;
@@ -134,10 +128,8 @@ function automatic void readPixelTxt_1d_in(
   while (!$feof(fd)) begin
      if (!$fgets(line, fd)) break;
 
-     // 주석(#) 또는 빈 줄 skip
      if (line.len() == 0 || line.substr(0,1) == "#") continue;
 
-     // x, y, N-bit 헥사값 파싱
      code = $sscanf(line, "%d %d %h", x, y, val);
      if (code != 3) begin
         $display("ERROR: Malformed line: %s", line);
@@ -166,7 +158,6 @@ function automatic void readPixelTxt_1d_out(
      $finish;
   end
 
-  // 헤더(“# x y Data”)가 있다면 첫 줄을 무시
   if (!$fgets(line, fd)) begin
      $display("ERROR: Empty file %s", filename);
      $finish;
@@ -175,10 +166,8 @@ function automatic void readPixelTxt_1d_out(
   while (!$feof(fd)) begin
      if (!$fgets(line, fd)) break;
 
-     // 주석(#) 또는 빈 줄 skip
      if (line.len() == 0 || line.substr(0,1) == "#") continue;
 
-     // x, y, N-bit 헥사값 파싱
      code = $sscanf(line, "%d %d %h", x, y, val);
      if (code != 3) begin
         $display("ERROR: Malformed line: %s", line);
