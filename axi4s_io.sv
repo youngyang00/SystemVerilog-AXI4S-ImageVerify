@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 Gwangsun Shin
+
 `ifndef AXI4S_INTERFACE
 `define AXI4S_INTERFACE
 interface axi4s_io(input bit clock);

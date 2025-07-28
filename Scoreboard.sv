@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 Gwangsun Shin
+
 `ifndef INC_SCOREBOARD
 `define INC_SCOREBOARD
 `include "imageProcessPkg.sv"

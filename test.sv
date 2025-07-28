@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 Gwangsun Shin
+
 `timescale 1ns/1ps
 `include "axi4s_io.sv"
 `include "Generator.sv"

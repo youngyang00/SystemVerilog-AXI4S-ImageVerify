@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 Gwangsun Shin
+
 `ifndef IMAGE_PROCESS_PACKAGE
 `define IMAGE_PROCESS_PACKAGE
 package imageProcessPkg;

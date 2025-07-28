@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 Gwangsun Shin
+
 `ifndef INC_DRIVER_SV
 `define INC_DRIVER_SV
 `include "axi4s_io.sv"
