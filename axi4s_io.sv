@@ -25,7 +25,6 @@ interface axi4s_io(input bit clock);
 
    clocking signal_drv @(posedge clock);
       default input  #2ns  output #2ns;
-      // testbench → DUT 로 드라이브
       output m_axis_tready;
       output s_axis_tvalid;
    endclocking
@@ -33,7 +32,6 @@ interface axi4s_io(input bit clock);
 
    clocking signal_smp @(posedge clock);
       default input  #2ns  output #2ns;
-      // DUT → testbench 로 읽기
       input m_axis_tready;
       input s_axis_tvalid;
    endclocking
